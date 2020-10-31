@@ -35,6 +35,7 @@ def scanCallBack(msg):
 def timerCallBack(event):
 	sp=0
 	state=1
+	control=0
 	if len(scan.ranges) > 0:
 		scanmin=min(scan.ranges)
 		for i in range(len(scan.ranges)):
