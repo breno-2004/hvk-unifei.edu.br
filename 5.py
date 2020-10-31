@@ -36,7 +36,7 @@ def timerCallBack(event):
 	#Estado 1,encontrando o angulo
 	scanmin=min(scan.ranges)
 	tam=len(scan.ranges)
-	for i in range(tam)
+	for i in range(tam):
 		if scan.ranges(i) == scanmin
 			sp=i
 	print("Len:")
