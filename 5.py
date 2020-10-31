@@ -33,60 +33,44 @@ def scanCallBack(msg):
 
 # TIMER - Control Loop ----------------------------------------------
 def timerCallBack(event):
-	#Estado 1,encontrando o angulo
-	scanmin=min(scan.ranges)
-	tam=len(scan.ranges)
-	for i in range(tam):
-		if scan.ranges[i] == scanmin:
-			sp=i
-	print("Len:")
-	print(scanmin)
-	print("Len:")
-	print(len(scan.ranges))
-	print("sp:")
-	print(sp)
-	print("angmin:")
-	print(scan.angle_min)
-	print("angmax:")
-	print(scan.angle_max)
-	'''
-	for i in range(0 , len(scan.ranges))
-		va = 1000
-		if scan.ranges(i) < va and scan.ranges(i) > 0
-			va = scan.rages(i)
-			sp = i
-	print("Len:")
-	print(len(scan.ranges))
-	print("va:")
-	print(va)
-	print("sp:")
-	print(sp)
-	print("angmin:")
-	print(scan.angle_min)
-	print("angmax:")
-	print(scan.angle_max)
-	'''
-	'''
-	#Estado 2,virando para o setpoint
-    yaw = getAngle(odom)
-    setpoint = sp
-    error = (setpoint - yaw)
-    
-    if abs(error) > 180:
-        if setpoint < 0:
-            error += 360 
-        else:
-            error -= 360
-        
-        P = kp*error
-        I = 0
-        D = 0
-        control = P+I+D
+	sp=0
+	state=1
+	if len(scan.ranges) > 0:
+		scanmin=min(scan.ranges)
+		for i in range(len(scan.ranges)):
+			if scan.ranges[i] == scanmin:
+				sp=i
+		print("scanmin:")
+		print(scanmin)
+		print("Len:")
+		print(len(scan.ranges))
+		print("sp:")
+		print(sp)
+		print("angmin:")
+		print(scan.angle_min)
+		print("angmax:")
+		print(scan.angle_max)
 
-    msg = Twist()
-    msg.linear.x = control
-    pub.publish(msg)
-    '''
+	#Estado 2,virando para o setpoint
+	yaw = getAngle(odom) 
+	setpoint = sp
+	error = (setpoint - yaw)
+    
+	if abs(error) > 180:
+		if setpoint < 0:
+			error += 360 
+		else:
+			error -= 360
+        
+		P = kp*error
+		I = 0
+		D = 0
+		control = P+I+D
+
+	msg = Twist()
+	msg.linear.x = control
+	pub.publish(msg)
+
 
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
