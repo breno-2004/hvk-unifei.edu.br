@@ -69,7 +69,7 @@ def timerCallBack(event):
 		control = P+I+D
 
 	msg = Twist()
-	msg.linear.x = control
+	msg.angular.z = control
 	pub.publish(msg)
 
 
