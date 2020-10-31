@@ -37,7 +37,7 @@ def timerCallBack(event):
 	scanmin=min(scan.ranges)
 	tam=len(scan.ranges)
 	for i in range(tam):
-		if scan.ranges(i) == scanmin
+		if scan.ranges[i] == scanmin
 			sp=i
 	print("Len:")
 	print(len(scan.ranges))
