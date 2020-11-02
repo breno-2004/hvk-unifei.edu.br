@@ -69,6 +69,7 @@ def timerCallBack(event):
 	global old_error1
 	global error2
 	global old_error2
+	global periodo
 	sp=0
 	#Encontrando o setpoint do angulo
 	if len(scan.ranges) > 0:
@@ -88,6 +89,8 @@ def timerCallBack(event):
 		print(scan.angle_max)
 		print("Scan pos 0:")#na frente do robo
 		print(scan.ranges[0])
+		print("periodo:")
+		print(periodo)
 	#Girando
 	yaw = getAngle(odom) 
 	setpoint1 = sp
@@ -139,6 +142,6 @@ pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
 
-timer = rospy.Timer(rospy.Duration(periodo), timerCallBack)
+timer = rospy.Timer(rospy.Duration(0.05), timerCallBack)
 
 rospy.spin()
