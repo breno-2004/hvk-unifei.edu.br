@@ -157,6 +157,7 @@ def timerCallBack(event):
 	if len(scan.ranges) > 0 and state == 1:
 		if error1==0:
 			state=2
+	'''
 	if state == 2:
 		#Andando em direcao ao objeto(setpoint=50cm) so com P
 		setpoint2 = 0.5
@@ -181,7 +182,7 @@ def timerCallBack(event):
 	msg2 = Twist()
 	msg2.linear.x = control2
 	pub.publish(msg2)
-
+	'''
 
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
