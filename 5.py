@@ -112,9 +112,9 @@ def timerCallBack(event):
 		control1 = P1+I1+D1
 		old_error1 = error1
 		
-	msg1 = Twist()
-	msg1.angular.z = control1
-	pub.publish(msg1)
+	msg = Twist()
+	msg.angular.z = control1
+	pub.publish(msg)
 	
 	#Andando em direcao ao objeto(setpoint=50cm)
 	setpoint2 = 0.5
@@ -137,9 +137,9 @@ def timerCallBack(event):
 	else:
 		control2 = 0        
     
-	msg2 = Twist()
-	msg2.linear.x = control2
-	pub.publish(msg2)
+	msg = Twist()
+	msg.linear.x = control2
+	pub.publish(msg)
 
 
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
