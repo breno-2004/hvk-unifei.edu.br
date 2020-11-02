@@ -152,7 +152,7 @@ def timerCallBack(event):
 	
 	control1 = P1+I1+D1
 	msg1 = Twist()
-	msg1angular.z = control1
+	msg1.angular.z = control1
 	pub.publish(msg1)
 
 	#Terminou de girar
