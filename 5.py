@@ -134,50 +134,48 @@ def timerCallBack(event):
 	pub.publish(msg)
 	'''
 	#Girando so com P deu certo
-	if state==1:
-		yaw = getAngle(odom) 
-		setpoint1 = sp
-		error1 = (setpoint1 - yaw)
-		
-		if abs(error1) > 180:
-			if setpoint < 0:
-				error1 += 360 
-			else:
-				error1 -= 360
-		
-		P1 = kp*error1
-		I1 = 0
-		D1 = 0
-		
-		control1 = P1+I1+D1
-		msg1 = Twist()
-		msg1.angular.z = control1
-		pub.publish(msg1)
+	yaw = getAngle(odom) 
+	setpoint1 = sp
+	error1 = (setpoint1 - yaw)
 	
-		#Terminou de girar
-		if len(scan.ranges) > 0 and state == 1:
-			if error1==0:
-				state=2
-	if state == 2:
-		#Andando em direcao ao objeto(setpoint=50cm) so com P
-		setpoint2 = 0.5
-	    
-		scan_len = len(scan.ranges)
-		if state == 2:
-			read = min(scan.ranges[scan_len-1 : scan_len+1])
-	
-			error2 = -(setpoint2 - read)
-	        
-			P2 = kp2*error2
-			I2 = 0
-			D2 = 0
-			control2 = P2+I2+D2
-			if control2 > 1:
-			    control2 = 1
-			elif control2 < -1:
-			    control2 = -1
+	if abs(error1) > 180:
+		if setpoint < 0:
+			error1 += 360 
 		else:
-			control2 = 0        
+			error1 -= 360
+	
+	P1 = kp*error1
+	I1 = 0
+	D1 = 0
+	
+	control1 = P1+I1+D1
+	msg1 = Twist()
+	msg1.angular.z = control1
+	pub.publish(msg1)
+	
+	#Terminou de girar
+	if len(scan.ranges) > 0 and state == 1:
+		if error1==0:
+			state=2
+	#Andando em direcao ao objeto(setpoint=50cm) so com P
+	setpoint2 = 0.5
+	
+	scan_len = len(scan.ranges)
+	if state == 2:
+		read = min(scan.ranges[scan_len-1 : scan_len+1])
+	
+		error2 = -(setpoint2 - read)
+	    
+		P2 = kp2*error2
+		I2 = 0
+		D2 = 0
+		control2 = P2+I2+D2
+		if control2 > 1:
+		    control2 = 1
+		elif control2 < -1:
+		    control2 = -1
+	else:
+		control2 = 0        
     
 	msg2 = Twist()
 	msg2.linear.x = control2
