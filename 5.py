@@ -161,7 +161,7 @@ def timerCallBack(event):
 			if error1<0.01:
 				state=2
 				msg.angular.z=0
-				print(''estado'')
+				print("estado")
 				print(state)
 	'''
 	#Andando em direcao ao objeto(setpoint=50cm) so com P
