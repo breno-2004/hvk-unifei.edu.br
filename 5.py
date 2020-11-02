@@ -113,7 +113,7 @@ def timerCallBack(event):
 		control1 = P1+I1+D1
 		error1 = old_error1
 	'''	
-	#Girando só com P
+	#Girando so com P
 	yaw = getAngle(odom) 
 	setpoint1 = sp
 	error1 = (setpoint1 - yaw)
