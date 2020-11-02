@@ -115,11 +115,15 @@ def timerCallBack(event):
 		else:
 			error1 -= 360
         
-		P1 = kp*error1
-		I1 = I1 + error1 * ki
-		D1 = (error1 - old_error1)*kd
-		control1 = P1+I1+D1
-		error1 = old_error1
+	P1 = kp*error1
+	I1 = I1 + error1 * ki
+	D1 = (error1 - old_error1)*kd
+	control1 = P1+I1+D1
+	old_error1 = error1
+	
+	msg = Twist()
+	msg.angular.z = control1
+	pub.publish(msg)
 	'''
 	#Girando so com P
 	yaw = getAngle(odom) 
