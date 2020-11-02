@@ -16,6 +16,8 @@ error1 = 0
 old_error1 = 0
 error2 = 0
 old_error2 = 0
+control1=0
+control2=0
 odom = Odometry()
 scan = LaserScan()
 
@@ -70,6 +72,8 @@ def timerCallBack(event):
 	global error2
 	global old_error2
 	global periodo
+	global control1
+	global control2
 	sp=0
 	#Encontrando o setpoint do angulo
 	if len(scan.ranges) > 0:
