@@ -134,31 +134,33 @@ def timerCallBack(event):
 	pub.publish(msg)
 	'''
 	#Girando so com P deu certo
-	yaw = getAngle(odom) 
-	setpoint1 = sp
-	error1 = (setpoint1 - yaw)
-	
-	if abs(error1) > 180:
-		if setpoint < 0:
-			error1 += 360 
-		else:
-			error1 -= 360
-	
-	P1 = kp*error1
-	I1 = 0
-	D1 = 0
-	
-	control1 = P1+I1+D1
-	msg = Twist()
-	msg.angular.z = control1
-	print("angular")
-	print(msg.angular.z)
-	pub.publish(msg)
+	if state==1:
+		yaw = getAngle(odom) 
+		setpoint1 = sp
+		error1 = (setpoint1 - yaw)
+		
+		if abs(error1) > 180:
+			if setpoint < 0:
+				error1 += 360 
+			else:
+				error1 -= 360
+		
+		P1 = kp*error1
+		I1 = 0
+		D1 = 0
+		
+		control1 = P1+I1+D1
+		msg = Twist()
+		msg.angular.z = control1
+		print("angular")
+		print(msg.angular.z)
+		pub.publish(msg)
+		
+		#Terminou de girar
+		if len(scan.ranges) > 0 and state == 1:
+			if error1<0.01:
+				state=2
 	'''
-	#Terminou de girar
-	if len(scan.ranges) > 0 and state == 1:
-		if error1==0:
-			state=2
 	#Andando em direcao ao objeto(setpoint=50cm) so com P
 	setpoint2 = 0.5
 	
