@@ -58,7 +58,7 @@ Soma=sum_digits_string(str('2017001339'))+Soma
 Soma=sum_digits_string(str('30550'))+Soma
 Soma=sum_digits_string(str('2017020610'))+Soma
 frequencia=(Soma/4)
-periodo=(1/frequencia)
+periodo=float(1/frequencia)
 #--------------------------------------------------------------------	
 # TIMER - Control Loop ----------------------------------------------
 def timerCallBack(event):
@@ -75,8 +75,9 @@ def timerCallBack(event):
 	global control1
 	global control2
 	sp=0
+	state=0
 	#Encontrando o setpoint do angulo
-	if len(scan.ranges) > 0:
+	if len(scan.ranges) > 0 and state == 0:
 		if min(scan.ranges) < 5 and min(scan.ranges) > 0:
 			scanmin=min(scan.ranges)
 		else:
@@ -84,6 +85,7 @@ def timerCallBack(event):
 		for i in range(len(scan.ranges)):
 			if scan.ranges[i] == scanmin:
 				sp=i
+				state = 1
 		print("scanmin:")
 		print(scanmin)
 		print("Len:")
