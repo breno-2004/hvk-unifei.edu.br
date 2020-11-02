@@ -80,7 +80,7 @@ def timerCallBack(event):
 		if min(scan.ranges) < 5 and min(scan.ranges) > 0:
 			scanmin=min(scan.ranges)
 		else:
-			scanmin==0
+			scanmin=0
 		for i in range(len(scan.ranges)):
 			if scan.ranges[i] == scanmin:
 				sp=i
@@ -141,7 +141,7 @@ def timerCallBack(event):
 	scan_len = len(scan.ranges)
 	if scan_len > 0:
 		read = 0.5#Forcando erro 0
-		if min(scan.ranges[scan_len-1 : scan_len+1]) > 0 and min(scan.ranges[scan_len-1 : scan_len+1]) < 2 :
+		if min(scan.ranges[scan_len-1 : scan_len+1]) > 0 and min(scan.ranges[scan_len-1 : scan_len+1]) < 5 :
 			read = min(scan.ranges[scan_len-1 : scan_len+1])
 	
 		error2 = -(setpoint2 - read)
