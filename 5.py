@@ -76,9 +76,11 @@ def timerCallBack(event):
 	global control2
 	sp=0
 	#Encontrando o setpoint do angulo
-
 	if len(scan.ranges) > 0:
-		scanmin=min(scan.ranges)
+		if min(scan.ranges) < 5 and min(scan.ranges) > 0:
+			scanmin=min(scan.ranges)
+		else:
+			scanmin==0
 		for i in range(len(scan.ranges)):
 			if scan.ranges[i] == scanmin:
 				sp=i
