@@ -108,8 +108,8 @@ def timerCallBack(event):
 		print(scan.ranges[0])
 	
 
-	print("estado:")
-	print(state)
+	#print("estado:")
+	#print(state)
 	#Girando com PID dando errado
 	'''
 	yaw = getAngle(odom) 
@@ -151,6 +151,8 @@ def timerCallBack(event):
 	control1 = P1+I1+D1
 	msg = Twist()
 	msg.angular.z = control1
+	print("angular")
+	print(msg.angular.z)
 	pub.publish(msg)
 	
 	#Terminou de girar
