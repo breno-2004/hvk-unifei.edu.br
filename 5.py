@@ -154,7 +154,7 @@ def timerCallBack(event):
 	print("angular")
 	print(msg.angular.z)
 	pub.publish(msg)
-	
+	'''
 	#Terminou de girar
 	if len(scan.ranges) > 0 and state == 1:
 		if error1==0:
@@ -182,7 +182,7 @@ def timerCallBack(event):
 	msg2 = Twist()
 	msg2.linear.x = control2
 	pub.publish(msg2)
-
+	'''
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
