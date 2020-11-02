@@ -119,7 +119,7 @@ def timerCallBack(event):
 	I1 = I1 + error1 * ki
 	D1 = (error1 - old_error1)*kd
 	control1 = P1+I1+D1
-	old_error1 = error1
+	error1 = old_error1
 	
 	msg = Twist()
 	msg.angular.z = control1
