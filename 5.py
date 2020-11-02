@@ -152,42 +152,42 @@ def timerCallBack(event):
 		control1 = P1+I1+D1
 		msg = Twist()
 		msg.angular.z = control1
+		
 		print("angular")
 		print(msg.angular.z)
 		pub.publish(msg)
 		
 		#Terminou de girar
 		if len(scan.ranges) > 0 and state == 1:
-			if error1<0.01:
+			if msg.angular.z<0.001 and msg.angular.z>0:
 				state=2
 				msg.angular.z=0
 				print("estado")
 				print(state)
-	'''
 	#Andando em direcao ao objeto(setpoint=50cm) so com P
-	setpoint2 = 0.5
-	
-	scan_len = len(scan.ranges)
-	if state == 2:
-		read = min(scan.ranges[scan_len-1 : scan_len+1])
-	
-		error2 = -(setpoint2 - read)
+	if state==2:
+		setpoint2 = 0.5
+		scan_len = len(scan.ranges)
+		if state == 2:
+			read = min(scan.ranges[scan_len-1 : scan_len+1])
+		
+			error2 = -(setpoint2 - read)
+		    
+			P2 = kp2*error2
+			I2 = 0
+			D2 = 0
+			control2 = P2+I2+D2
+			if control2 > 1:
+			    control2 = 1
+			elif control2 < -1:
+			    control2 = -1
+		else:
+			control2 = 0        
 	    
-		P2 = kp2*error2
-		I2 = 0
-		D2 = 0
-		control2 = P2+I2+D2
-		if control2 > 1:
-		    control2 = 1
-		elif control2 < -1:
-		    control2 = -1
-	else:
-		control2 = 0        
-    
-	msg2 = Twist()
-	msg2.linear.x = control2
-	pub.publish(msg2)
-	'''
+		msg = Twist()
+		msg.linear.x = control2
+		pub.publish(msg)
+
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
