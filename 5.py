@@ -115,7 +115,7 @@ def timerCallBack(event):
 	msg = Twist()
 	msg.angular.z = control1
 	pub.publish(msg)
-	
+	'''
 	#Andando em direcao ao objeto(setpoint=50cm)
 	setpoint2 = 0.5
     
@@ -142,7 +142,7 @@ def timerCallBack(event):
 	msg = Twist()
 	msg.linear.x = control2
 	pub.publish(msg)
-
+	'''
 
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
