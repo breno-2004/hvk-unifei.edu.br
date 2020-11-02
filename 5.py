@@ -76,7 +76,7 @@ def timerCallBack(event):
 	global control2
 	sp=0
 	#Encontrando o setpoint do angulo
-	'''
+
 	if len(scan.ranges) > 0:
 		scanmin=min(scan.ranges)
 		for i in range(len(scan.ranges)):
@@ -96,7 +96,6 @@ def timerCallBack(event):
 		print(scan.ranges[0])
 		print("periodo:")
 		print(periodo)
-	'''
 	#Girando
 	yaw = getAngle(odom) 
 	setpoint1 = sp
