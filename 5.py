@@ -99,6 +99,7 @@ def timerCallBack(event):
 		print("periodo:")
 		print(float(periodo))
 	#Girando
+	'''
 	yaw = getAngle(odom) 
 	setpoint1 = sp
 	error1 = (setpoint1 - yaw)
@@ -117,7 +118,7 @@ def timerCallBack(event):
 	'''
 	#Girando so com P
 	yaw = getAngle(odom) 
-	setpoint1 = 90
+	setpoint1 = sp
 	error1 = (setpoint1 - yaw)
 	
 	if abs(error1) > 180:
@@ -129,8 +130,8 @@ def timerCallBack(event):
 	P1 = kp*error1
 	I1 = 0
 	D1 = 0
+	
 	control1 = P1+I1+D1
-	'''
 	msg = Twist()
 	msg.angular.z = control1
 	pub.publish(msg)
