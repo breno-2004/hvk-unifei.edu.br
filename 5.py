@@ -85,7 +85,7 @@ def timerCallBack(event):
 			scanmin=0
 		for i in scan.ranges:	
 		#for i in range(len(scan.ranges)):
-			if scan.ranges[i] == scanmin:
+			if scan.ranges[int(i)] == scanmin:
 				sp=i
 				state = 1
 		print("scanmin:")
