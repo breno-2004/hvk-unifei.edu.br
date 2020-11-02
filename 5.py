@@ -121,7 +121,7 @@ def timerCallBack(event):
     
 	scan_len = len(scan.ranges)
 	if scan_len > 0:
-		read = 0
+		read = 0.5#Forçando erro 0
 		if min(scan.ranges[scan_len-1 : scan_len+1]) > 0 and min(scan.ranges[scan_len-1 : scan_len+1]) < 2 :
 			read = min(scan.ranges[scan_len-1 : scan_len+1])
 	
