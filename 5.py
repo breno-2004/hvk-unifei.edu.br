@@ -6,7 +6,7 @@ import tf
 import math
 
 
-kp = 1
+kp = 0.01
 ki = 1
 kd = 1
 I1 = 0
