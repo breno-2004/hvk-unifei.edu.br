@@ -157,26 +157,26 @@ def timerCallBack(event):
 	if len(scan.ranges) > 0 and state == 1:
 		if error1==0:
 			state=2
-	
-	#Andando em direcao ao objeto(setpoint=50cm) so com P
-	setpoint2 = 0.5
-    
-	scan_len = len(scan.ranges)
 	if state == 2:
-		read = min(scan.ranges[scan_len-1 : scan_len+1])
-
-		error2 = -(setpoint2 - read)
-        
-		P2 = kp2*error2
-		I2 = 0
-		D2 = 0
-		control2 = P2+I2+D2
-		if control2 > 1:
-		    control2 = 1
-		elif control2 < -1:
-		    control2 = -1
-	else:
-		control2 = 0        
+		#Andando em direcao ao objeto(setpoint=50cm) so com P
+		setpoint2 = 0.5
+	    
+		scan_len = len(scan.ranges)
+		if state == 2:
+			read = min(scan.ranges[scan_len-1 : scan_len+1])
+	
+			error2 = -(setpoint2 - read)
+	        
+			P2 = kp2*error2
+			I2 = 0
+			D2 = 0
+			control2 = P2+I2+D2
+			if control2 > 1:
+			    control2 = 1
+			elif control2 < -1:
+			    control2 = -1
+		else:
+			control2 = 0        
     
 	msg2 = Twist()
 	msg2.linear.x = control2
