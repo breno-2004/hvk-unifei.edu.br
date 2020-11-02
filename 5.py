@@ -6,9 +6,9 @@ import tf
 import math
 
 
-kp = 1
-ki = 1
-kd = 1
+kp = 0.2
+ki = 0.2
+kd = 0.2
 I1 = 0
 I2 = 0
 setpoint = 0
