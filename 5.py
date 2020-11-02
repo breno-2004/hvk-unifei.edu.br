@@ -20,7 +20,8 @@ control1=0
 control2=0
 odom = Odometry()
 scan = LaserScan()
-
+state=0
+sp=0
 rospy.init_node('cmd_node')
 
 # Auxiliar functions ------------------------------------------------
@@ -75,8 +76,8 @@ def timerCallBack(event):
 	global control1
 	global control2
 	global periodo
-	sp=0
-	state=0
+	global state
+	global sp
 	#Encontrando o setpoint do angulo
 	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 2 and min(scan.ranges) > 0:
 		for i in scan.ranges:	
