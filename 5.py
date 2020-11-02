@@ -7,8 +7,8 @@ import math
 
 
 kp = 1
-ki = 2
-kd = 3
+ki = 1
+kd = 1
 I1 = 0
 I2 = 0
 setpoint = 0
