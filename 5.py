@@ -151,9 +151,9 @@ def timerCallBack(event):
 	D1 = 0
 	
 	control1 = P1+I1+D1
-	msg = Twist()
-	msg.angular.z = control1
-	pub.publish(msg)
+	msg1 = Twist()
+	msg1angular.z = control1
+	pub.publish(msg1)
 
 	#Terminou de girar
 	if len(scan.ranges) > 0 and state == 1:
@@ -180,9 +180,9 @@ def timerCallBack(event):
 	else:
 		control2 = 0        
     
-	msg = Twist()
-	msg.linear.x = control2
-	pub.publish(msg)
+	msg2 = Twist()
+	msg2.linear.x = control2
+	pub.publish(msg2)
 
 
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
