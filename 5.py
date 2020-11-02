@@ -74,6 +74,7 @@ def timerCallBack(event):
 	global periodo
 	global control1
 	global control2
+	global periodo
 	sp=0
 	state=0
 	#Encontrando o setpoint do angulo
@@ -82,7 +83,8 @@ def timerCallBack(event):
 			scanmin=min(scan.ranges)
 		else:
 			scanmin=0
-		for i in range(len(scan.ranges)):
+		for i in range(scan.ranges):	
+		#for i in range(len(scan.ranges)):
 			if scan.ranges[i] == scanmin:
 				sp=i
 				state = 1
