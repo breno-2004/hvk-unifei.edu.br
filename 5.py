@@ -38,7 +38,7 @@ def scanCallBack(msg):
     global scan
     scan = msg
 #--------------------------------------------------------------------
-#Função soma de string ------------------------------------------------
+#Funcao soma de string ------------------------------------------------
 def sum_digits_string(str1):
     sum_digit = 0
     for x in str1:
