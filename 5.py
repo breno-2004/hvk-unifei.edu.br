@@ -85,7 +85,7 @@ def timerCallBack(event):
 			scanmin=0
 		for i in scan.ranges:	
 		#for i in range(len(scan.ranges)):
-			if scan.ranges[int(i)] == scanmin:
+			if i == scanmin:
 				sp=i
 				state = 1
 		print("scanmin:")
@@ -102,6 +102,8 @@ def timerCallBack(event):
 		print(scan.ranges[0])
 		print("periodo:")
 		print(float(periodo))
+		print("estado:")
+		print(state)
 	#Girando
 	'''
 	yaw = getAngle(odom) 
