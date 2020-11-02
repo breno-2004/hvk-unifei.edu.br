@@ -101,7 +101,7 @@ def timerCallBack(event):
 		print(float(periodo))
 		print("estado:")
 		print(state)
-	if len(scan.ranges) > 0:
+	#if len(scan.ranges) > 0:
 		#print("Scan pos 0:")#na frente do robo
 		#print(scan.ranges[0])
 	#Girando
