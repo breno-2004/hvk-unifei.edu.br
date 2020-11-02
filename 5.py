@@ -109,7 +109,7 @@ def timerCallBack(event):
 	msg1.angular.z = control1
 	pub.publish(msg1)
 	
-	#Andando em direção ao objeto(setpoint=50cm)
+	#Andando em direcao ao objeto(setpoint=50cm)
 	setpoint2 = 0.5
     
 	scan_len = len(scan.ranges)
