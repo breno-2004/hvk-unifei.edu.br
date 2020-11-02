@@ -62,8 +62,8 @@ Soma=sum_digits_string(str('2017001339'))+Soma
 Soma=sum_digits_string(str('30550'))+Soma
 Soma=sum_digits_string(str('2017020610'))+Soma
 frequencia=(Soma/4)
-periodo=float(1/frequencia)
-print("SOma")
+periodo=float(1/float(frequencia))
+print("Soma")
 print(Soma)
 print("freq")
 print(frequencia)
@@ -192,6 +192,6 @@ pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
 
-timer = rospy.Timer(rospy.Duration(0.05), timerCallBack)
+timer = rospy.Timer(rospy.Duration(periodo), timerCallBack)
 
 rospy.spin()
