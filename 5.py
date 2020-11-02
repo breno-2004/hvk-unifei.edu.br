@@ -95,7 +95,7 @@ def timerCallBack(event):
 		print("Scan pos 0:")#na frente do robo
 		print(scan.ranges[0])
 		print("periodo:")
-		print(periodo)
+		print(float(periodo))
 	#Girando
 	yaw = getAngle(odom) 
 	setpoint1 = sp
