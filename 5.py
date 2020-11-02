@@ -9,6 +9,9 @@ import math
 kp = 0.1
 ki = 0.1
 kd = 0.1
+kp2 = 1
+ki2 = 1
+kd2 = 1
 I1 = 0
 I2 = 0
 setpoint = 0
@@ -60,6 +63,12 @@ Soma=sum_digits_string(str('30550'))+Soma
 Soma=sum_digits_string(str('2017020610'))+Soma
 frequencia=(Soma/4)
 periodo=float(1/frequencia)
+print("SOma")
+print(Soma)
+print("freq")
+print(frequencia)
+print("periodo")
+print(periodo)
 #--------------------------------------------------------------------	
 # TIMER - Control Loop ----------------------------------------------
 def timerCallBack(event):
@@ -97,14 +106,14 @@ def timerCallBack(event):
 		print(scan.angle_max)
 		print("Scan pos 0:")#na frente do robo
 		print(scan.ranges[0])
+	
+	if len(scan.ranges) > 0:
 		print("periodo:")
 		print(float(periodo))
 		print("estado:")
 		print(state)
-	#if len(scan.ranges) > 0:
-		#print("Scan pos 0:")#na frente do robo
-		#print(scan.ranges[0])
-	#Girando com PID
+	#Girando com PID dando errado
+	'''
 	yaw = getAngle(odom) 
 	setpoint1 = sp
 	error1 = (setpoint1 - yaw)
@@ -126,7 +135,7 @@ def timerCallBack(event):
 	msg.angular.z = control1
 	pub.publish(msg)
 	'''
-	#Girando so com P
+	#Girando so com P deu certo
 	yaw = getAngle(odom) 
 	setpoint1 = sp
 	error1 = (setpoint1 - yaw)
@@ -145,24 +154,25 @@ def timerCallBack(event):
 	msg = Twist()
 	msg.angular.z = control1
 	pub.publish(msg)
-	'''
-	'''
-	#Andando em direcao ao objeto(setpoint=50cm)
+
+	#Terminou de girar
+	if len(scan.ranges) > 0 and state == 1:
+		if error1==0:
+			state=2
+	
+	#Andando em direcao ao objeto(setpoint=50cm) só com P
 	setpoint2 = 0.5
     
 	scan_len = len(scan.ranges)
-	if scan_len > 0:
-		read = 0.5#Forcando erro 0
-		if min(scan.ranges[scan_len-1 : scan_len+1]) > 0 and min(scan.ranges[scan_len-1 : scan_len+1]) < 5 :
-			read = min(scan.ranges[scan_len-1 : scan_len+1])
-	
+	if state == 2:
+		read = min(scan.ranges[scan_len-1 : scan_len+1])
+
 		error2 = -(setpoint2 - read)
         
-		P2 = kp*error2
-		I2 = I2 + error2 * ki
-		D2 = (error2 - old_error2)*kd
+		P2 = kp2*error2
+		I2 = 0
+		D2 = 0
 		control2 = P2+I2+D2
-		old_error2 = error2
 		if control2 > 1:
 		    control2 = 1
 		elif control2 < -1:
@@ -173,7 +183,7 @@ def timerCallBack(event):
 	msg = Twist()
 	msg.linear.x = control2
 	pub.publish(msg)
-	'''
+
 
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
