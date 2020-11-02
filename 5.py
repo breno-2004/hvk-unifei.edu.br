@@ -104,8 +104,7 @@ def timerCallBack(event):
 	#if len(scan.ranges) > 0:
 		#print("Scan pos 0:")#na frente do robo
 		#print(scan.ranges[0])
-	#Girando
-	'''
+	#Girando com PID
 	yaw = getAngle(odom) 
 	setpoint1 = sp
 	error1 = (setpoint1 - yaw)
@@ -120,7 +119,8 @@ def timerCallBack(event):
 	I1 = I1 + error1 * ki
 	D1 = (error1 - old_error1)*kd
 	control1 = P1+I1+D1
-	error1 = old_error1
+	
+	old_error1 = error1
 	
 	msg = Twist()
 	msg.angular.z = control1
@@ -145,7 +145,7 @@ def timerCallBack(event):
 	msg = Twist()
 	msg.angular.z = control1
 	pub.publish(msg)
-
+	'''
 	'''
 	#Andando em direcao ao objeto(setpoint=50cm)
 	setpoint2 = 0.5
