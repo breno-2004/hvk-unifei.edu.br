@@ -160,7 +160,7 @@ def timerCallBack(event):
 		if error1==0:
 			state=2
 	
-	#Andando em direcao ao objeto(setpoint=50cm) só com P
+	#Andando em direcao ao objeto(setpoint=50cm) so com P
 	setpoint2 = 0.5
     
 	scan_len = len(scan.ranges)
