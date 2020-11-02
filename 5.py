@@ -78,16 +78,12 @@ def timerCallBack(event):
 	sp=0
 	state=0
 	#Encontrando o setpoint do angulo
-	if len(scan.ranges) > 0 and state == 0:
-		#if min(scan.ranges) < 5 and min(scan.ranges) > 0:
-		#	scanmin=min(scan.ranges)
-		#else:
-		#	scanmin=0
+	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 2 and min(scan.ranges) > 0:
 		for i in scan.ranges:	
-			if i == min(scan.ranges) and state == 0:
-				state = 1
-			else:
+			if i != min(scan.ranges) and state == 0:
 				sp=sp+1
+			else:
+				state=1
 		print("scanmin:")
 		print(min(scan.ranges))
 		print("Len:")
