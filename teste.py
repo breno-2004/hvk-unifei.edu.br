@@ -48,7 +48,7 @@ def timerCallBack(event):
     global old_error
 	
     yaw = getAngle(odom)
-    setpoint = -45
+    setpoint = 135
     error = (setpoint - yaw)
     print(error)
     if abs(error) > 180:
@@ -58,14 +58,14 @@ def timerCallBack(event):
             error -= 360
 	
     P = kp*error
-    I = I + error * ki
-    #I = 0
-    #D = (error - old_error)*kd
-    D = 0
+    #I = I + (error * ki)
+    I = 0
+    D = (error - old_error)*kd
+    #D = 0
 
     PID = P + I + D
     print(PID)
-    #old_error = error
+    old_error = error
     #error = old_error
     msg = Twist()
     msg.angular.z = PID
