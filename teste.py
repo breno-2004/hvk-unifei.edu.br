@@ -64,6 +64,7 @@ def timerCallBack(event):
     D = 0
 
     PID = P + I + D
+    print(PID)
     #old_error = error
     #error = old_error
     msg = Twist()
