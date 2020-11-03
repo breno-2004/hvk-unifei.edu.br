@@ -6,9 +6,9 @@ import tf
 import math
 
 
-kp = 0.001
-ki =0.001
-kd = 0.001
+kp = 0.1
+ki =0.1
+kd = 0.1
 I = 0
 setpoint = 0
 error = 0
@@ -51,7 +51,7 @@ def timerCallBack(event):
     setpoint = 0
     error = (setpoint - yaw)
     print(error)
-    if abs(error) > 180:
+    if abs(error) > -90:
         if setpoint < 0:
             error += 360 
         else:
