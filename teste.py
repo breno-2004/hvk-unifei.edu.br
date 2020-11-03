@@ -7,7 +7,7 @@ import math
 
 
 kp = 0.01
-ki =0.01
+ki =0.0001
 kd = 0.01
 I = 0
 setpoint = 0
@@ -58,7 +58,7 @@ def timerCallBack(event):
             error -= 360
 	
     P = kp*error
-    I = (I + error) * ki
+    I = I + error * ki
     #I = 0
     D = (error - old_error)*kd
     #D = 0
