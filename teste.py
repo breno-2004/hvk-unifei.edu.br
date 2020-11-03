@@ -57,7 +57,7 @@ def timerCallBack(event):
         else:
             error -= 360
 	
-	P = kp*error
+    P = kp*error
     I = I + error * ki
     D = (error - old_error)*kd
 
