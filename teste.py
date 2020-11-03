@@ -51,7 +51,7 @@ def timerCallBack(event):
     setpoint = 45
     error = (setpoint - yaw)
     print(error)
-    if abs(error) > -90:
+    if abs(error) > 180:
         if setpoint < 0:
             error += 360 
         else:
