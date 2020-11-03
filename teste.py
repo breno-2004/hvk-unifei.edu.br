@@ -6,9 +6,9 @@ import tf
 import math
 
 
-kp = 0.001
-ki =0.001
-kd = 0.001
+kp = 0.00001
+ki =0.00001
+kd = 0.00001
 I = 0
 setpoint = 0
 error = 0
@@ -63,8 +63,8 @@ def timerCallBack(event):
 
     PID = P + I + D
     print(PID)
-    old_error = error
-    #error = old_error
+    #old_error = error
+    error = old_error
     msg = Twist()
     msg.angular.z = PID
     pub.publish(msg)
