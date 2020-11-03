@@ -59,7 +59,7 @@ def timerCallBack(event):
 	
     P = kp*error
     I = (I + error) * ki
-    I = 0
+    #I = 0
     D = (error - old_error)*kd
     #D = 0
 
