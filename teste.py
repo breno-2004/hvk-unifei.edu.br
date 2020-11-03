@@ -6,7 +6,7 @@ import tf
 import math
 
 
-kp = 0.001
+kp = 0.01
 ki =0.01
 kd = 0.01
 I = 0
@@ -48,7 +48,7 @@ def timerCallBack(event):
     global old_error
 	
     yaw = getAngle(odom)
-    setpoint = 45
+    setpoint = -45
     error = (setpoint - yaw)
     print(error)
     if abs(error) > 180:
@@ -58,8 +58,8 @@ def timerCallBack(event):
             error -= 360
 	
     P = kp*error
-    #I = I + error * ki
-    I = 0
+    I = I + error * ki
+    #I = 0
     #D = (error - old_error)*kd
     D = 0
 
