@@ -48,7 +48,7 @@ def timerCallBack(event):
     global old_error
 	
     yaw = getAngle(odom)
-    setpoint = 90
+    setpoint = 0
     error = (setpoint - yaw)
     print(error)
     if abs(error) > 180:
@@ -60,8 +60,8 @@ def timerCallBack(event):
     P = kp*error
     #I = I + error * ki
     I = 0
-    #D = (error - old_error)*kd
-    D = 0
+    D = (error - old_error)*kd
+    #D = 0
 
     PID = P + I + D
     old_error = error
