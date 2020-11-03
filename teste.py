@@ -64,8 +64,8 @@ def timerCallBack(event):
     #D = 0
 
     PID = P + I + D
-    old_error = error
-    #error = old_error
+    #old_error = error
+    error = old_error
     msg = Twist()
     msg.angular.z = PID
     pub.publish(msg)
