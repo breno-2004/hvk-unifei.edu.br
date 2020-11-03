@@ -48,7 +48,7 @@ def timerCallBack(event):
     global old_error
 	
     yaw = getAngle(odom)
-    setpoint = 135
+    setpoint = -90
     error = (setpoint - yaw)
     print(error)
     if abs(error) > 180:
