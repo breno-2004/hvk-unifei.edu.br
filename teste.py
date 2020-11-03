@@ -6,9 +6,9 @@ import tf
 import math
 
 
-kp = 0.001
-ki =0.00001
-kd = 0.01
+kp = 0.1
+ki =0.1
+kd = 0.1
 I = 0
 setpoint = 0
 error = 0
