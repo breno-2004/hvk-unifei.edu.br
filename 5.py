@@ -6,11 +6,11 @@ import tf
 import math
 
 
-kp = 0.1
-ki = 0.1
-kd = 0.1
+kp = 0.01
+ki = 0.0001
+kd = 0.01
 kp2 = 1
-ki2 = 1
+ki2 = 0.01
 kd2 = 1
 I1 = 0
 I2 = 0
@@ -108,30 +108,35 @@ def timerCallBack(event):
 		print(scan.ranges[0])
 	
 
-	#print("estado:")
-	#print(state)
-	#Girando com PID dando errado
-	'''
-	yaw = getAngle(odom) 
-	setpoint1 = sp
-	error1 = (setpoint1 - yaw)
-    
-	if abs(error1) > 180:
-		if setpoint < 0:
-			error1 += 360 
-		else:
-			error1 -= 360
-        
-	P1 = kp*error1
-	I1 = I1 + error1 * ki
-	D1 = (error1 - old_error1)*kd
-	control1 = P1+I1+D1
-	
-	old_error1 = error1
-	
-	msg = Twist()
-	msg.angular.z = control1
-	pub.publish(msg)
+	#Girando com PID 
+	if state==1:
+		yaw = getAngle(odom) 
+		setpoint1 = sp
+		error1 = (setpoint1 - yaw)
+	    
+		if abs(error1) > 180:
+			if setpoint < 0:
+				error1 += 360 
+			else:
+				error1 -= 360
+	        
+		P1 = kp*error1
+		I1 = I1 + error1 * ki
+		D1 = (error1 - old_error1)*kd
+		control1 = P1+I1+D1
+		
+		old_error1 = error1
+		
+		msg = Twist()
+		msg.angular.z = control1
+		pub.publish(msg)
+		#Terminou de girar
+		if len(scan.ranges) > 0 and state == 1:
+			if msg.angular.z<0.001 and msg.angular.z>0:
+				state=2
+				msg.angular.z=0
+				print("estado")
+				print(state)
 	'''
 	#Girando so com P deu certo
 	if state==1:
@@ -164,7 +169,8 @@ def timerCallBack(event):
 				msg.angular.z=0
 				print("estado")
 				print(state)
-	#Andando em direcao ao objeto(setpoint=50cm) so com P
+		'''
+	#Andando em direcao ao objeto(ate dist de 50cm) so com PID
 	if state==2:
 		setpoint2 = 0.5
 		scan_len = len(scan.ranges)
@@ -174,8 +180,8 @@ def timerCallBack(event):
 			error2 = -(setpoint2 - read)
 		    
 			P2 = kp2*error2
-			I2 = 0
-			D2 = 0
+			I2 = I2 + error2 * ki2
+			D2 = (error2 - old_error2)*kd2
 			control2 = P2+I2+D2
 			if control2 > 1:
 			    control2 = 1
