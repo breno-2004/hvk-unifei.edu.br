@@ -162,7 +162,7 @@ def timerCallBack(event):
 		if len(scan.ranges) > 0 and state == 2:
 			if scan.ranges[0] < 0.5:
 				state=3#Acabou
-				msg.linear.x=0
+				control2=0
 				print("estado")
 				print(state)
 				
