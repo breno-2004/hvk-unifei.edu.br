@@ -113,7 +113,7 @@ def timerCallBack(event):
 		yaw = getAngle(odom) 
 		setpoint1 = sp
 		print("setpoint1:")
-		print(setpoint)
+		print(setpoint1)
 		error1 = (setpoint1 - yaw)
 	    
 		if abs(error1) > 180:
