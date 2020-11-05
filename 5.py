@@ -88,7 +88,7 @@ def timerCallBack(event):
 	global state
 	global sp
 	#Encontrando o setpoint do angulo
-	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 2.2 and min(scan.ranges) > 0:
+	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 3 and min(scan.ranges) > 0:
 		for i in scan.ranges:	
 			if i != min(scan.ranges) and state == 0:
 				sp=sp+1
@@ -111,6 +111,8 @@ def timerCallBack(event):
 	#Girando com PID 
 	if state==1:
 		yaw = getAngle(odom) 
+		print("setpoint:")
+		print(setpoint)
 		setpoint1 = sp
 		error1 = (setpoint1 - yaw)
 	    
