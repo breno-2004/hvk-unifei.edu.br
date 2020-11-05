@@ -88,7 +88,7 @@ def timerCallBack(event):
 	global state
 	global sp
 	#Encontrando o setpoint do angulo
-	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 3 and min(scan.ranges) > 0:
+	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 2.2 and min(scan.ranges) > 0:
 		for i in scan.ranges:	
 			if i != min(scan.ranges) and state == 0:
 				sp=sp+1
@@ -195,7 +195,7 @@ def timerCallBack(event):
 		pub.publish(msg)
 		#Chegou em 50cm de distancia
 		if len(scan.ranges) > 0 and state == 2:
-			if msg.linear.x<0.1 and msg.linear.x>0:
+			if scan.ranges[0] < 0.5:
 				state=3#Acabou
 				msg.linear.x=0
 				print("estado")
