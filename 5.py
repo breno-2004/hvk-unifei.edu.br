@@ -137,39 +137,7 @@ def timerCallBack(event):
 				msg.angular.z=0
 				print("estado")
 				print(state)
-	'''
-	#Girando so com P deu certo
-	if state==1:
-		yaw = getAngle(odom) 
-		setpoint1 = sp
-		error1 = (setpoint1 - yaw)
-		
-		if abs(error1) > 180:
-			if setpoint < 0:
-				error1 += 360 
-			else:
-				error1 -= 360
-		
-		P1 = kp*error1
-		I1 = 0
-		D1 = 0
-		
-		control1 = P1+I1+D1
-		msg = Twist()
-		msg.angular.z = control1
-		
-		print("angular")
-		print(msg.angular.z)
-		pub.publish(msg)
-		
-		#Terminou de girar
-		if len(scan.ranges) > 0 and state == 1:
-			if msg.angular.z<0.001 and msg.angular.z>0:
-				state=2
-				msg.angular.z=0
-				print("estado")
-				print(state)
-		'''
+
 	#Andando em direcao ao objeto(ate dist de 50cm) so com PID
 	if state==2:
 		setpoint2 = 0.5
@@ -190,9 +158,6 @@ def timerCallBack(event):
 		else:
 			control2 = 0        
 	    
-		msg = Twist()
-		msg.linear.x = control2
-		pub.publish(msg)
 		#Chegou em 50cm de distancia
 		if len(scan.ranges) > 0 and state == 2:
 			if scan.ranges[0] < 0.5:
@@ -201,7 +166,10 @@ def timerCallBack(event):
 				print("estado")
 				print(state)
 				
-				
+		msg = Twist()
+		msg.linear.x = control2
+		pub.publish(msg)
+
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
