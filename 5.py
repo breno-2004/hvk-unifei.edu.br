@@ -134,7 +134,7 @@ def timerCallBack(event):
 		pub.publish(msg)
 		#Terminou de girar
 		if len(scan.ranges) > 0 and state == 1:
-			if msg.angular.z<0.1 and msg.angular.z>0:
+			if msg.angular.z<0.001 and msg.angular.z>0:
 				state=2
 				msg.angular.z=0
 				print("estado")
