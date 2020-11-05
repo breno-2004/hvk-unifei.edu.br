@@ -88,7 +88,7 @@ def timerCallBack(event):
 	global state
 	global sp
 	#Encontrando o setpoint do angulo
-	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 2 and min(scan.ranges) > 0:
+	if len(scan.ranges) > 0 and state == 0 and min(scan.ranges) < 3 and min(scan.ranges) > 0:
 		for i in scan.ranges:	
 			if i != min(scan.ranges) and state == 0:
 				sp=sp+1
@@ -200,6 +200,8 @@ def timerCallBack(event):
 				msg.linear.x=0
 				print("estado")
 				print(state)
+				
+				
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
