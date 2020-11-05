@@ -193,7 +193,13 @@ def timerCallBack(event):
 		msg = Twist()
 		msg.linear.x = control2
 		pub.publish(msg)
-
+		#Chegou em 50cm de distancia
+		if len(scan.ranges) > 0 and state == 2:
+			if msg.linear.x<0.1 and msg.linear.x>0:
+				state=3#Acabou
+				msg.linear.x=0
+				print("estado")
+				print(state)
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 odom_sub = rospy.Subscriber('/odom', Odometry, odomCallBack)
 scan_sub = rospy.Subscriber('/scan', LaserScan, scanCallBack)
