@@ -111,9 +111,9 @@ def timerCallBack(event):
 	#Girando com PID 
 	if state==1:
 		yaw = getAngle(odom) 
-		print("setpoint:")
-		print(setpoint)
 		setpoint1 = sp
+		print("setpoint1:")
+		print(setpoint)
 		error1 = (setpoint1 - yaw)
 	    
 		if abs(error1) > 180:
