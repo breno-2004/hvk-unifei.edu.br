@@ -6,9 +6,9 @@ import tf
 import math
 
 
-kp = 0.01
-ki = 0.0001
-kd = 0.01
+kp = 0.1
+ki = 0.01
+kd = 0.1
 kp2 = 1
 ki2 = 0.01
 kd2 = 1
@@ -134,7 +134,7 @@ def timerCallBack(event):
 		pub.publish(msg)
 		#Terminou de girar
 		if len(scan.ranges) > 0 and state == 1:
-			if abs(msg.angular.z)<0.0001 and msg.angular.z>0:
+			if abs(msg.angular.z)<0.001 and msg.angular.z>0:
 				state=2
 				msg.angular.z=0
 				print("estado")
