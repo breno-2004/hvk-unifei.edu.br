@@ -7,7 +7,7 @@ import math
 
 
 kp = 0.1
-ki = 0.01
+ki = 0.0001
 kd = 0.1
 kp2 = 1
 ki2 = 0.01
