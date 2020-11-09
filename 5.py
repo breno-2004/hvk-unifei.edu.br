@@ -109,7 +109,7 @@ def timerCallBack(event):
 	
 
 	#Girando com PID 
-	if state==1:
+	elif state==1:
 		yaw = getAngle(odom) 
 		setpoint1 = sp
 		print("setpoint1:")
@@ -134,14 +134,14 @@ def timerCallBack(event):
 		pub.publish(msg)
 		#Terminou de girar
 		if len(scan.ranges) > 0 and state == 1:
-			if abs(msg.angular.z)<0.01 and msg.angular.z>0:
+			if abs(msg.angular.z)<0.01:
 				state=2
 				msg.angular.z=0
 				print("estado")
 				print(state)
 
 	#Andando em direcao ao objeto(ate dist de 50cm) so com PID
-	if state==2:
+	elif state==2:
 		setpoint2 = 0.5
 		scan_len = len(scan.ranges)
 		if state == 2:
