@@ -162,7 +162,7 @@ def timerCallBack(event):
 	    
 		#Chegou em 50cm de distancia
 		if len(scan.ranges) > 0 and state == 2:
-			if scan.ranges[0] < 0.5:#Obs:Aqui eu não estou ajustando o robô para ficar exatamente em 50cm,eu faço o PID na ida do robô e no momento que ele fica à uma dist. menor que 50cm eu já paro o robô.Sem usar o erro denovo para parar exatamente há uma distância de 50cm.(Coloquei esse comentário depois de enviar o vídeo pois lendo novamente a tarefa acredito que exista mais de uma interpretação aqui,sendo a outra o robô se posicionar em uma distancia exatamente de 50cm do cilindro,o que eu NÃO fiz.)
+			if scan.ranges[0] < 0.5:#Obs:Aqui eu nao estou ajustando o robo para ficar exatamente em 50cm,eu faço o PID na ida do robo e no momento que ele fica a uma dist. menor que 50cm eu ja paro o robo.Sem usar o erro denovo para parar exatamente quando a distancia for de 50cm.(Coloquei esse comentario depois de enviar o video pois lendo novamente a tarefa acredito que exista mais de uma interpretacao aqui,sendo a outra o robo se posicionar em uma distancia exatamente de 50cm do cilindro,o que eu NAO fiz.)
 				state=3#Acabou
 				control2=0
 				print("estado")
